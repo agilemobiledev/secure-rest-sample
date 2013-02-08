@@ -2,7 +2,9 @@ package com.jayway.template.sample;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,5 +25,9 @@ public class GameRepository {
 
     public GameDTO getGame(String id) {
         return games.get(id);
+    }
+
+    public Collection<GameDTO> getJoinableGames() {
+        return games.values();
     }
 }

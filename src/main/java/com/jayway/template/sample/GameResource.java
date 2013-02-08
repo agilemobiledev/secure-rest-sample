@@ -1,6 +1,5 @@
 package com.jayway.template.sample;
 
-import org.codehaus.jackson.annotate.JsonValue;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
@@ -8,8 +7,8 @@ import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.security.PublicKey;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,8 +28,13 @@ public class GameResource {
     @GET
     @PreAuthorize("isAuthenticated()")
     public Response get() {
-        LinkDTO link = new LinkDTO("/api/game", "Create new game", "createGame");
-        return Response.status(200).entity(link).build();
+        Collection<GameDTO> games = gameRepository.getJoinableGames();
+        List<LinkDTO> links = new ArrayList<LinkDTO>();
+        links.add(new LinkDTO("/api/game", "Create new game", "createGame"));
+        for(GameDTO game : games ) {
+            links.add(new LinkDTO("/api/game/"+game.gameID, "Join game", "joinGame"));
+        }
+        return Response.status(200).entity(links).build();
     }
 
     @GET
