@@ -44,7 +44,7 @@ function RestrictedCtrl($scope, $http, $location) {
     $scope.greet = undefined;
     $scope.secretMessage = undefined;
 
-    $http.get("/api/sample/greet")
+    $http.get("/api/game")
         .success(function (data) {
             $scope.greet = data;
         })
