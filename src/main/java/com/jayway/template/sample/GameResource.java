@@ -27,8 +27,10 @@ public class GameResource {
     GameRepository gameRepository;
 
     @GET
-    public String get() {
-        return "Log in before you can play!";
+    @PreAuthorize("isAuthenticated()")
+    public Response get() {
+        LinkDTO link = new LinkDTO("/api/game", "Create new game", "createGame");
+        return Response.status(200).entity(link).build();
     }
 
     @GET
@@ -58,22 +60,5 @@ public class GameResource {
         game.addPlayer(player2.userName);
         return Response.status(200).entity(gameRepository.getGame(gameId)).build();
     }
-
-
-    @GET
-    @Path("greet")
-    @PreAuthorize("isAuthenticated()")
-    public Response yourEyesOnly() {
-        LinkDTO link = new LinkDTO("/api/game", "Create new game", "createGame");
-        return Response.status(200).entity(link).build();
-    }
-
-    @GET
-    @Path("secret")
-    @PreAuthorize("hasRole('secret')")
-    public String secret() {
-        return "this is secret";
-    }
-
 
 }
