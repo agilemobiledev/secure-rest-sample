@@ -4,7 +4,9 @@
     <div ng-show="greet">
         <p>As you are authenticated, you can now start this AWESOME game!</p>
         <p>Push the button to start</p>
-        <img src="../img/startbutton.jpg" alt="start_image">
+        <img id="startbutton" src="../img/startbutton.jpg" alt="start_image">
+        <br>
+        <button ng-click="createGame()">Create Game</button>
         <blockquote>{{greet}}</blockquote>
     </div>
 
