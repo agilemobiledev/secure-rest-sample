@@ -73,8 +73,9 @@ public class GameResource {
     @Path("/{gameId}/play")
     public Response play(@PathParam("gameId") String gameId, ActionDTO action) {
         GameDTO game = gameRepository.getGame(gameId);
+        game.addAction(action);
 
-
+        return Response.status(201).entity(game).build();
 
     }
 

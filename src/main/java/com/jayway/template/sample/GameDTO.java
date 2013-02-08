@@ -18,6 +18,7 @@ public class GameDTO {
     public PersonDTO playerTwo;
     public ActionDTO action1;
     public ActionDTO action2;
+    public String result;
 
     public GameDTO(String userName) {
         this.gameID = userName + System.currentTimeMillis();
@@ -37,7 +38,7 @@ public class GameDTO {
         }
 
         if(action1 != null && action2 != null) {
-            //calculateWinner();
+            result = GameEngine.calculateWinner(action1, action2);
         }
     }
 
