@@ -59,6 +59,7 @@ public class GameResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @PreAuthorize("isAuthenticated()")
+    @Path("/{gameId}") git ci -PreAuthorize -m
     public Response joinGame(@PathParam("gameId") String gameId, PersonDTO player2) {
         GameDTO game = gameRepository.getGame(gameId);
         game.addPlayer(player2.userName);
