@@ -1,10 +1,12 @@
 package com.jayway.template.sample;
 
+import org.codehaus.jackson.annotate.JsonValue;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.List;
@@ -29,15 +31,16 @@ public class GameResource {
     @Path("/gameid")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public GameDTO getGame() {
-        return game;
+        return new GameDTO("USer1");
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Consumes({MediaType.APPLICATION_JSON})
-    public GameDTO createGame() {
-        String userName = "user1";
-        return new GameDTO(userName);
+
+    public Response createGame(String userName) {
+        GameDTO game = new GameDTO(userName);
+        return Response.status(201).entity(game).build();
     }
 
     @PUT
@@ -45,6 +48,7 @@ public class GameResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public GameDTO joinGame() {
         String userName = "User2";
+        GameDTO game = new GameDTO("User1");
         game.addPlayer(userName);
         return game;
     }

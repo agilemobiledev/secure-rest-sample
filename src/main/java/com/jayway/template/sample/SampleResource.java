@@ -24,7 +24,7 @@ public class SampleResource {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Path("developers")
 	public List<PersonDTO> developers() {
-		return Arrays.asList(new PersonDTO("Jan", "Kronquist"), new PersonDTO("Oskar", "Wickström"));
+		return Arrays.asList(new PersonDTO("Jan Kronquist"), new PersonDTO("Oskar Wickström"));
 	}
 
 	@GET
