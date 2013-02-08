@@ -66,4 +66,21 @@ public class GameResource {
         return Response.status(200).entity(gameRepository.getGame(gameId)).build();
     }
 
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @PreAuthorize("isAuthenticated()")
+    @Path("/{gameId}/play")
+    public Response play(@PathParam("gameId") String gameId, ActionDTO action) {
+        GameDTO game = gameRepository.getGame(gameId);
+
+
+
+    }
+
+
+
+
+
+
 }

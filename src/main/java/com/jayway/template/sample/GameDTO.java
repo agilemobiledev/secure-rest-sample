@@ -16,6 +16,8 @@ public class GameDTO {
     public String gameID;
     public PersonDTO playerOne;
     public PersonDTO playerTwo;
+    public ActionDTO action1;
+    public ActionDTO action2;
 
     public GameDTO(String userName) {
         this.gameID = userName + System.currentTimeMillis();
@@ -26,6 +28,19 @@ public class GameDTO {
     public void addPlayer(String userName) {
         playerTwo = new PersonDTO(userName);
     }
+
+    public void addAction(ActionDTO action) {
+        if (action.person.userName.equalsIgnoreCase(playerOne.userName)) {
+            action1 = action;
+        } else {
+            action2 = action;
+        }
+
+        if(action1 != null && action2 != null) {
+            //calculateWinner();
+        }
+    }
+
 
 
 }
