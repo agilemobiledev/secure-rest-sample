@@ -9,10 +9,10 @@ package com.jayway.template.sample;
  */
 public class ActionDTO {
 
-    public PersonDTO person;
+    public String person;
     public String action;
 
-    public ActionDTO(PersonDTO person, String action) {
+    public ActionDTO(String person, String action) {
         this.person = person;
         this.action = action;
     }

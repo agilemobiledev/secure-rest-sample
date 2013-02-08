@@ -31,7 +31,7 @@ public class GameDTO {
     }
 
     public void addAction(ActionDTO action) {
-        if (action.person.userName.equalsIgnoreCase(playerOne.userName)) {
+        if (action.person.equalsIgnoreCase(playerOne.userName)) {
             action1 = action;
         } else {
             action2 = action;
