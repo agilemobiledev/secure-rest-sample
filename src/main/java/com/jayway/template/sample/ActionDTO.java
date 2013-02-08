@@ -11,7 +11,7 @@ public class ActionDTO {
 
     public String person;
     public String action;
-
+    public ActionDTO() {}
     public ActionDTO(String person, String action) {
         this.person = person;
         this.action = action;
