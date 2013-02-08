@@ -56,4 +56,17 @@ function RestrictedCtrl($scope, $http, $location) {
             console.log(status);
             if(status == 200) $scope.secretMessage = data;
         })
+
+    $scope.createGame = function() {
+        data = {};
+        data.userName = "Daniel";
+        $http.post("/api/game", data)
+            .success(function (data, status) {
+                console.log(data);
+                console.log(status);
+                if(status == 200) $scope.secretMessage = data;
+                alert("Game created!");
+            })
+    }
+
 }
