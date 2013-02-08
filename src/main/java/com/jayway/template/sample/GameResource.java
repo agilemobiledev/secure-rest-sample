@@ -29,13 +29,13 @@ public class GameResource {
 
     @GET
     @Path("/gameid")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     public GameDTO getGame() {
         return new GameDTO("USer1");
     }
 
     @POST
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
 
     public Response createGame(PersonDTO person) {
@@ -44,7 +44,7 @@ public class GameResource {
     }
 
     @PUT
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public GameDTO joinGame() {
         String userName = "User2";
