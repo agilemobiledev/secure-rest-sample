@@ -38,8 +38,8 @@ public class GameResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Consumes({MediaType.APPLICATION_JSON})
 
-    public Response createGame(String userName) {
-        GameDTO game = new GameDTO(userName);
+    public Response createGame(PersonDTO person) {
+        GameDTO game = new GameDTO(person.userName);
         return Response.status(201).entity(game).build();
     }
 
