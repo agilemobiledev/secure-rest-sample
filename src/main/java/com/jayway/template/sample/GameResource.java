@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,45 +23,49 @@ import java.util.List;
 @Path("/game")
 public class GameResource {
 
+    @Resource(name = "games")
+    GameRepository gameRepository;
+
     @GET
     public String get() {
-        return "This is public";
+        return "Log in before you can play!";
     }
 
     @GET
-    @Path("/gameid")
+    @Path("/{gameId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public GameDTO getGame() {
-        return new GameDTO("USer1");
+    @PreAuthorize("isAuthenticated()")
+    public Response getGame(@PathParam("gameId") String gameId) {
+        return Response.status(200).entity(gameRepository.getGame(gameId)).build();
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-
+    @PreAuthorize("isAuthenticated()")
     public Response createGame(PersonDTO person) {
         GameDTO game = new GameDTO(person.userName);
+        gameRepository.addGame(game);
         return Response.status(201).entity(game).build();
     }
 
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public GameDTO joinGame() {
-        String userName = "User2";
-        GameDTO game = new GameDTO("User1");
-        game.addPlayer(userName);
-        return game;
+    @PreAuthorize("isAuthenticated()")
+    public Response joinGame(@PathParam("gameId") String gameId, PersonDTO player2) {
+        GameDTO game = gameRepository.getGame(gameId);
+        game.addPlayer(player2.userName);
+        return Response.status(200).entity(gameRepository.getGame(gameId)).build();
     }
-
-
 
 
     @GET
     @Path("greet")
     @PreAuthorize("isAuthenticated()")
-    public String yourEyesOnly() {
-        return "Hello world";
+    public Response yourEyesOnly() {
+        LinkDTO link = new LinkDTO("/api/game", "Create new game", "createGame");
+        return Response.status(200).entity(link).build();
     }
 
     @GET

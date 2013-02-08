@@ -23,6 +23,8 @@ public class GameResourceTest {
     @Test
     public void createGameShouldReturnId() {
         given().contentType("application/json").param("userName", "Henrik").expect().statusCode(201).when().post("/api/game");
+
+
     }
 
 
