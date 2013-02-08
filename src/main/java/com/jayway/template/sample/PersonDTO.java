@@ -4,12 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class PersonDTO {
-	public PersonDTO(String first, String last) {
-		firstName = first;
-		lastName = last;
+	public PersonDTO(String userName) {
+		this.userName = userName;
 	}
 	public PersonDTO() {
 	}
-	public String firstName;
-	public String lastName;
+	public String userName;
 }
