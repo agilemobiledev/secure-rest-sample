@@ -2,10 +2,7 @@ package com.jayway.template.sample;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +25,13 @@ public class GameRepository {
     }
 
     public Collection<GameDTO> getJoinableGames() {
-        return games.values();
+        Collection<GameDTO> allGames = games.values();
+        List<GameDTO> joinableGames = new ArrayList<GameDTO>();
+        for(GameDTO game: allGames) {
+            if (game.playerTwo == null) {
+                joinableGames.add(game);
+            }
+        }
+        return joinableGames;
     }
 }
